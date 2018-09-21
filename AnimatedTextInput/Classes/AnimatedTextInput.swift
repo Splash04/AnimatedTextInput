@@ -362,7 +362,7 @@ open class AnimatedTextInput: UIControl {
         placeholderLayer.fontSize = fontSize
         placeholderLayer.foregroundColor = foregroundColor
         placeholderLayer.string = text
-        placeholderLayer.isWrapped = true
+//        placeholderLayer.numbe
         textInput.view.accessibilityLabel = text
         layoutPlaceholderLayer()
     }

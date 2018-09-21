@@ -21,6 +21,12 @@
 		565B331F1ED5EA2500EF70A1 /* disclosure.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B33181ED5EA2500EF70A1 /* disclosure.png */; };
 		565B33201ED5EA2500EF70A1 /* disclosure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B33191ED5EA2500EF70A1 /* disclosure@2x.png */; };
 		565B33211ED5EA2500EF70A1 /* disclosure@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 565B331A1ED5EA2500EF70A1 /* disclosure@3x.png */; };
+		639C8D1C215584FA003CE0DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639C8D1B215584FA003CE0DB /* AppDelegate.swift */; };
+		639C8D1E215584FA003CE0DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639C8D1D215584FA003CE0DB /* ViewController.swift */; };
+		639C8D21215584FA003CE0DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 639C8D1F215584FA003CE0DB /* Main.storyboard */; };
+		639C8D23215584FD003CE0DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 639C8D22215584FD003CE0DB /* Assets.xcassets */; };
+		639C8D26215584FD003CE0DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 639C8D24215584FD003CE0DB /* LaunchScreen.storyboard */; };
+		639C8D2C21558631003CE0DB /* AnimatedTextInput.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565B32F71ED5E92900EF70A1 /* AnimatedTextInput.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +46,13 @@
 		565B33181ED5EA2500EF70A1 /* disclosure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = disclosure.png; path = AnimatedTextInput/Assets/disclosure.png; sourceTree = "<group>"; };
 		565B33191ED5EA2500EF70A1 /* disclosure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "disclosure@2x.png"; path = "AnimatedTextInput/Assets/disclosure@2x.png"; sourceTree = "<group>"; };
 		565B331A1ED5EA2500EF70A1 /* disclosure@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "disclosure@3x.png"; path = "AnimatedTextInput/Assets/disclosure@3x.png"; sourceTree = "<group>"; };
+		639C8D19215584FA003CE0DB /* AnimatedTextInputTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimatedTextInputTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		639C8D1B215584FA003CE0DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		639C8D1D215584FA003CE0DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		639C8D20215584FA003CE0DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		639C8D22215584FD003CE0DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		639C8D25215584FD003CE0DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		639C8D27215584FD003CE0DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +60,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		639C8D16215584FA003CE0DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				639C8D2C21558631003CE0DB /* AnimatedTextInput.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,7 +86,9 @@
 				565B33191ED5EA2500EF70A1 /* disclosure@2x.png */,
 				565B331A1ED5EA2500EF70A1 /* disclosure@3x.png */,
 				565B32F91ED5E92900EF70A1 /* AnimatedTextInput */,
+				639C8D1A215584FA003CE0DB /* AnimatedTextInputTest */,
 				565B32F81ED5E92900EF70A1 /* Products */,
+				639C8D2B21558631003CE0DB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				565B32F71ED5E92900EF70A1 /* AnimatedTextInput.framework */,
+				639C8D19215584FA003CE0DB /* AnimatedTextInputTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,6 +113,26 @@
 				565B33081ED5E96500EF70A1 /* UIViewExtensions.swift */,
 			);
 			path = AnimatedTextInput;
+			sourceTree = "<group>";
+		};
+		639C8D1A215584FA003CE0DB /* AnimatedTextInputTest */ = {
+			isa = PBXGroup;
+			children = (
+				639C8D1B215584FA003CE0DB /* AppDelegate.swift */,
+				639C8D1D215584FA003CE0DB /* ViewController.swift */,
+				639C8D1F215584FA003CE0DB /* Main.storyboard */,
+				639C8D22215584FD003CE0DB /* Assets.xcassets */,
+				639C8D24215584FD003CE0DB /* LaunchScreen.storyboard */,
+				639C8D27215584FD003CE0DB /* Info.plist */,
+			);
+			path = AnimatedTextInputTest;
+			sourceTree = "<group>";
+		};
+		639C8D2B21558631003CE0DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,18 +166,41 @@
 			productReference = 565B32F71ED5E92900EF70A1 /* AnimatedTextInput.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		639C8D18215584FA003CE0DB /* AnimatedTextInputTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 639C8D2A215584FD003CE0DB /* Build configuration list for PBXNativeTarget "AnimatedTextInputTest" */;
+			buildPhases = (
+				639C8D15215584FA003CE0DB /* Sources */,
+				639C8D16215584FA003CE0DB /* Frameworks */,
+				639C8D17215584FA003CE0DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AnimatedTextInputTest;
+			productName = AnimatedTextInputTest;
+			productReference = 639C8D19215584FA003CE0DB /* AnimatedTextInputTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		565B32EE1ED5E92900EF70A1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = jobandtalent;
 				TargetAttributes = {
 					565B32F61ED5E92900EF70A1 = {
 						CreatedOnToolsVersion = 8.3.2;
 						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+					639C8D18215584FA003CE0DB = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = ZHF39F965P;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -144,6 +211,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 565B32ED1ED5E92900EF70A1;
 			productRefGroup = 565B32F81ED5E92900EF70A1 /* Products */;
@@ -151,6 +219,7 @@
 			projectRoot = "";
 			targets = (
 				565B32F61ED5E92900EF70A1 /* AnimatedTextInput */,
+				639C8D18215584FA003CE0DB /* AnimatedTextInputTest */,
 			);
 		};
 /* End PBXProject section */
@@ -167,6 +236,16 @@
 				565B331B1ED5EA2500EF70A1 /* cm_icon_input_eye_normal@2x.png in Resources */,
 				565B331C1ED5EA2500EF70A1 /* cm_icon_input_eye_normal@3x.png in Resources */,
 				565B33211ED5EA2500EF70A1 /* disclosure@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		639C8D17215584FA003CE0DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				639C8D26215584FD003CE0DB /* LaunchScreen.storyboard in Resources */,
+				639C8D23215584FD003CE0DB /* Assets.xcassets in Resources */,
+				639C8D21215584FA003CE0DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +266,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		639C8D15215584FA003CE0DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				639C8D1E215584FA003CE0DB /* ViewController.swift in Sources */,
+				639C8D1C215584FA003CE0DB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		639C8D1F215584FA003CE0DB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				639C8D20215584FA003CE0DB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		639C8D24215584FD003CE0DB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				639C8D25215584FD003CE0DB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		565B32FD1ED5E92900EF70A1 /* Debug */ = {
@@ -350,6 +457,51 @@
 			};
 			name = Release;
 		};
+		639C8D28215584FD003CE0DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZHF39F965P;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AnimatedTextInputTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uprightlabs.AnimatedTextInputTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		639C8D29215584FD003CE0DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZHF39F965P;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AnimatedTextInputTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uprightlabs.AnimatedTextInputTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -367,6 +519,15 @@
 			buildConfigurations = (
 				565B33001ED5E92900EF70A1 /* Debug */,
 				565B33011ED5E92900EF70A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		639C8D2A215584FD003CE0DB /* Build configuration list for PBXNativeTarget "AnimatedTextInputTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				639C8D28215584FD003CE0DB /* Debug */,
+				639C8D29215584FD003CE0DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
