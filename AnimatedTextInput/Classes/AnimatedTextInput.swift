@@ -251,7 +251,13 @@ open class AnimatedTextInput: UIControl {
     }
 
     fileprivate func layoutPlaceholderLayer() {
-        placeholderLayer.frame = CGRect(origin: placeholderPosition, size: CGSize(width: bounds.width, height: (style.textInputFont.pointSize * CGFloat(self.frameHeightCorrectionFactor)) ))
+        let placeholderFont = placeholderLayer.font ?? UIFont.systemFont(ofSize: 18)
+        let targetString = placeholderLayer.string as? String ?? ""
+        let actualSize = NSString(string: targetString).boundingRect(with: CGSize(width: bounds.width, height: .greatestFiniteMagnitude),
+                                                                          options: [.usesFontLeading, .usesLineFragmentOrigin],
+                                                                          attributes: [.font: placeholderFont],
+                                                                          context: nil).size
+        placeholderLayer.frame = CGRect(origin: placeholderPosition, size: actualSize)
     }
 
     // mark: Configuration
@@ -277,9 +283,10 @@ open class AnimatedTextInput: UIControl {
 
     fileprivate func setupCommonElements() {
         addLine()
-        addPlaceHolder()
         addTapGestureRecognizer()
         addTextInput()
+        addPlaceHolder()
+
     }
 
     fileprivate func addLine() {
@@ -361,8 +368,8 @@ open class AnimatedTextInput: UIControl {
     fileprivate func configurePlaceholderWith(fontSize: CGFloat, foregroundColor: CGColor, text: String?) {
         placeholderLayer.fontSize = fontSize
         placeholderLayer.foregroundColor = foregroundColor
-        placeholderLayer.string = text
-//        placeholderLayer.numbe
+        placeholderLayer.string = text        
+        placeholderLayer.isWrapped = true
         textInput.view.accessibilityLabel = text
         layoutPlaceholderLayer()
     }
