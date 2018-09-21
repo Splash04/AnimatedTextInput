@@ -253,10 +253,11 @@ open class AnimatedTextInput: UIControl {
     fileprivate func layoutPlaceholderLayer() {
         let placeholderFont = placeholderLayer.font ?? UIFont.systemFont(ofSize: 18)
         let targetString = placeholderLayer.string as? String ?? ""
-        let actualSize = NSString(string: targetString).boundingRect(with: CGSize(width: bounds.width, height: .greatestFiniteMagnitude),
+        var actualSize = NSString(string: targetString).boundingRect(with: CGSize(width: bounds.width, height: .greatestFiniteMagnitude),
                                                                           options: [.usesFontLeading, .usesLineFragmentOrigin],
                                                                           attributes: [.font: placeholderFont],
                                                                           context: nil).size
+        actualSize.height *= CGFloat(frameHeightCorrectionFactor)
         placeholderLayer.frame = CGRect(origin: placeholderPosition, size: actualSize)
     }
 
