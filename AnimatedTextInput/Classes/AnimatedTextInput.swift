@@ -188,7 +188,7 @@ open class AnimatedTextInput: UIControl {
             textInput.contentInset = insets
         }
     }
-
+    let test: Bool = true
     fileprivate let lineView = AnimatedLine()
     fileprivate let placeholderLayer = CATextLayer()
     fileprivate let counterLabel = UILabel()
