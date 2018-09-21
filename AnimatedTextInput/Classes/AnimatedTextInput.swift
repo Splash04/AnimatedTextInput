@@ -51,6 +51,7 @@ open class AnimatedTextInput: UIControl {
         didSet {
             placeholderLayer.string = placeHolderText
             textInput.view.accessibilityLabel = placeHolderText
+            invalidateIntrinsicContentSize()
         }
     }
     
@@ -203,7 +204,11 @@ open class AnimatedTextInput: UIControl {
     fileprivate var textInputTrailingConstraint: NSLayoutConstraint!
     fileprivate var disclosureViewWidthConstraint: NSLayoutConstraint!
     fileprivate var disclosureView: UIView?
-    fileprivate var placeholderErrorText: String?
+    fileprivate var placeholderErrorText: String? {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
 
     fileprivate var placeholderPosition: CGPoint {
         let hintPosition = CGPoint(
@@ -235,6 +240,7 @@ open class AnimatedTextInput: UIControl {
 
     override open var intrinsicContentSize: CGSize {
         let normalHeight = textInput.view.intrinsicContentSize.height
+
         return CGSize(width: UIViewNoIntrinsicMetric, height: normalHeight + style.topMargin + style.bottomMargin)
     }
 
@@ -250,14 +256,22 @@ open class AnimatedTextInput: UIControl {
         layoutPlaceholderLayer()
     }
 
-    fileprivate func layoutPlaceholderLayer() {
+    private func getPlaceholderHeight() -> CGFloat {
         let placeholderFont = placeholderLayer.font ?? UIFont.systemFont(ofSize: 18)
-        let targetString = placeholderLayer.string as? String ?? ""
-        var actualSize = NSString(string: targetString).boundingRect(with: CGSize(width: bounds.width, height: .greatestFiniteMagnitude),
-                                                                          options: [.usesFontLeading, .usesLineFragmentOrigin],
-                                                                          attributes: [.font: placeholderFont],
-                                                                          context: nil).size
-        actualSize.height *= CGFloat(frameHeightCorrectionFactor)
+        var targetString = placeHolderText
+        if let str = placeholderErrorText {
+            targetString = str
+        }
+        let actualSize = NSString(string: targetString).boundingRect(with: CGSize(width: bounds.width, height: .greatestFiniteMagnitude),
+                                                                     options: [.usesFontLeading, .usesLineFragmentOrigin],
+                                                                     attributes: [.font: placeholderFont],
+                                                                     context: nil).size
+        return actualSize.height
+    }
+    
+    fileprivate func layoutPlaceholderLayer() {
+        let height = getPlaceholderHeight()
+        let actualSize = CGSize(width: bounds.width, height: height * CGFloat(frameHeightCorrectionFactor))
         placeholderLayer.frame = CGRect(origin: placeholderPosition, size: actualSize)
     }
 
@@ -278,7 +292,7 @@ open class AnimatedTextInput: UIControl {
         if disclosureView == nil {
             textInputTrailingConstraint = pinTrailing(toTrailingOf: textInput.view, constant: style.rightMargin)
         }
-        pinTop(toTopOf: textInput.view, constant: style.topMargin)
+        pinTop(toTopOf: textInput.view, constant: max(style.topMargin, getPlaceholderHeight()))
         textInput.view.pinBottom(toTopOf: lineView, constant: style.bottomMargin)
     }
 
@@ -462,6 +476,7 @@ open class AnimatedTextInput: UIControl {
             textInput.configureErrorState(with: placeholderText)
         }
         animatePlaceholder(to: configurePlaceholderAsErrorHint)
+        invalidateIntrinsicContentSize()
     }
 
     open func clearError() {
@@ -474,6 +489,7 @@ open class AnimatedTextInput: UIControl {
         } else {
             animateToInactiveState()
         }
+        invalidateIntrinsicContentSize()
     }
 
     fileprivate func configureType() {
