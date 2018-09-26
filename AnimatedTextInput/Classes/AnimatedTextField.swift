@@ -175,6 +175,7 @@ extension AnimatedTextField: UITextFieldDelegate {
     }
 
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        rightView?.frame = rightViewRect(forBounds: bounds)
         return textInputDelegate?.textInputShouldBeginEditing(textInput: self) ?? true
     }
 
