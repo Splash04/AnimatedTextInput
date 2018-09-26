@@ -36,6 +36,11 @@ final public class AnimatedTextField: UITextField {
 
         setup()
     }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        rightView?.frame = rightViewRect(forBounds: bounds)
+    }
 
     fileprivate func setup() {
         delegate = self

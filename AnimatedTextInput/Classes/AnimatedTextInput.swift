@@ -254,6 +254,7 @@ open class AnimatedTextInput: UIControl {
     open override func layoutSubviews() {
         super.layoutSubviews()
         layoutPlaceholderLayer()
+
     }
 
     private func getPlaceholderHeight() -> CGFloat {
