@@ -67,6 +67,9 @@ fileprivate struct AnimatedTextInputPasswordConfigurator {
         textField.rightViewMode = .whileEditing
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
+        if #available(iOS 12.0, *) {
+            textField.passwordRules = UITextInputPasswordRules(descriptor: "minlength: 6")
+        }
         if toggleable {
             let disclosureButton = UIButton(type: .custom)
             disclosureButton.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: 20, height: 20))
