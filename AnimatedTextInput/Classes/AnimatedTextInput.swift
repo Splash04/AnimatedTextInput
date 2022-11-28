@@ -1,6 +1,6 @@
 import UIKit
 
-@objc public protocol AnimatedTextInputDelegate: class {
+@objc public protocol AnimatedTextInputDelegate: AnyObject {
     @objc optional func animatedTextInputDidBeginEditing(animatedTextInput: AnimatedTextInput)
     @objc optional func animatedTextInputDidEndEditing(animatedTextInput: AnimatedTextInput)
     @objc optional func animatedTextInputDidChange(animatedTextInput: AnimatedTextInput)
@@ -41,7 +41,7 @@ open class AnimatedTextInput: UIControl {
         set { textInput.currentKeyboardAppearance = newValue }
     }
     
-    open var clearButtonMode: UITextFieldViewMode = .whileEditing {
+    open var clearButtonMode: UITextField.ViewMode = .whileEditing {
         didSet {
             textInput.changeClearButtonMode(with: clearButtonMode)
         }
@@ -66,7 +66,7 @@ open class AnimatedTextInput: UIControl {
     
     open var placeholderAlignment: CATextLayer.Alignment = .natural {
         didSet {
-            placeholderLayer.alignmentMode = String(describing: placeholderAlignment)
+            placeholderLayer.alignmentMode = placeholderAlignment.mode
         }
     }
 
@@ -97,67 +97,67 @@ open class AnimatedTextInput: UIControl {
 
     open var font: UIFont? {
         get { return textInput.font }
-        set { textAttributes = [NSAttributedStringKey.font: newValue as Any] }
+        set { textAttributes = [NSAttributedString.Key.font: newValue as Any] }
     }
 
     open var textColor: UIColor? {
         get { return textInput.textColor }
-        set { textAttributes = [NSAttributedStringKey.foregroundColor: newValue as Any] }
+        set { textAttributes = [NSAttributedString.Key.foregroundColor: newValue as Any] }
     }
 
     open var lineSpacing: CGFloat? {
         get {
-            guard let paragraph = textAttributes?[NSAttributedStringKey.paragraphStyle] as? NSParagraphStyle else { return nil }
+            guard let paragraph = textAttributes?[NSAttributedString.Key.paragraphStyle] as? NSParagraphStyle else { return nil }
             return paragraph.lineSpacing
         }
         set {
             guard let spacing = newValue else { return }
-            let paragraphStyle = textAttributes?[NSAttributedStringKey.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
+            let paragraphStyle = textAttributes?[NSAttributedString.Key.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = spacing
-            textAttributes = [NSAttributedStringKey.paragraphStyle: paragraphStyle]
+            textAttributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         }
     }
 
     open var textAlignment: NSTextAlignment? {
         get {
-            guard let paragraph = textInput.textAttributes?[NSAttributedStringKey.paragraphStyle] as? NSParagraphStyle else { return nil }
+            guard let paragraph = textInput.textAttributes?[NSAttributedString.Key.paragraphStyle] as? NSParagraphStyle else { return nil }
             return paragraph.alignment
         }
         set {
             guard let alignment = newValue else { return }
-            let paragraphStyle = textAttributes?[NSAttributedStringKey.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
+            let paragraphStyle = textAttributes?[NSAttributedString.Key.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
             paragraphStyle.alignment = alignment
-            textAttributes = [NSAttributedStringKey.paragraphStyle: paragraphStyle]
+            textAttributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         }
     }
 
     open var tailIndent: CGFloat? {
         get {
-            guard let paragraph = textAttributes?[NSAttributedStringKey.paragraphStyle] as? NSParagraphStyle else { return nil }
+            guard let paragraph = textAttributes?[NSAttributedString.Key.paragraphStyle] as? NSParagraphStyle else { return nil }
             return paragraph.tailIndent
         }
         set {
             guard let indent = newValue else { return }
-            let paragraphStyle = textAttributes?[NSAttributedStringKey.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
+            let paragraphStyle = textAttributes?[NSAttributedString.Key.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
             paragraphStyle.tailIndent = indent
-            textAttributes = [NSAttributedStringKey.paragraphStyle: paragraphStyle]
+            textAttributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         }
     }
 
     open var headIndent: CGFloat? {
         get {
-            guard let paragraph = textAttributes?[NSAttributedStringKey.paragraphStyle] as? NSParagraphStyle else { return nil }
+            guard let paragraph = textAttributes?[NSAttributedString.Key.paragraphStyle] as? NSParagraphStyle else { return nil }
             return paragraph.headIndent
         }
         set {
             guard let indent = newValue else { return }
-            let paragraphStyle = textAttributes?[NSAttributedStringKey.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
+            let paragraphStyle = textAttributes?[NSAttributedString.Key.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
             paragraphStyle.headIndent = indent
-            textAttributes = [NSAttributedStringKey.paragraphStyle: paragraphStyle]
+            textAttributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         }
     }
 
-    open var textAttributes: [NSAttributedStringKey: Any]? {
+    open var textAttributes: [NSAttributedString.Key: Any]? {
         didSet {
             guard var textInputAttributes = textInput.textAttributes else {
                 textInput.textAttributes = textAttributes
@@ -241,7 +241,7 @@ open class AnimatedTextInput: UIControl {
     override open var intrinsicContentSize: CGSize {
         let normalHeight = textInput.view.intrinsicContentSize.height
 
-        return CGSize(width: UIViewNoIntrinsicMetric, height: normalHeight + style.topMargin + style.bottomMargin)
+        return CGSize(width: UIView.noIntrinsicMetric, height: normalHeight + style.topMargin + style.bottomMargin)
     }
 
     open override func updateConstraints() {
@@ -565,35 +565,35 @@ open class AnimatedTextInput: UIControl {
 
 extension AnimatedTextInput: TextInputDelegate {
 
-    open func textInputDidBeginEditing(textInput: TextInput) {
+    public func textInputDidBeginEditing(textInput: TextInput) {
         becomeFirstResponder()
         delegate?.animatedTextInputDidBeginEditing?(animatedTextInput: self)
     }
 
-    open func textInputDidEndEditing(textInput: TextInput) {
+    public func textInputDidEndEditing(textInput: TextInput) {
         resignFirstResponder()
         delegate?.animatedTextInputDidEndEditing?(animatedTextInput: self)
     }
 
-    open func textInputDidChange(textInput: TextInput) {
+    public func textInputDidChange(textInput: TextInput) {
         updateCounter()
         sendActions(for: .editingChanged)
         delegate?.animatedTextInputDidChange?(animatedTextInput: self)
     }
 
-    open func textInput(textInput: TextInput, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    public func textInput(textInput: TextInput, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         return delegate?.animatedTextInput?(animatedTextInput: self, shouldChangeCharactersInRange: range, replacementString: string) ?? true
     }
 
-    open func textInputShouldBeginEditing(textInput: TextInput) -> Bool {
+    public func textInputShouldBeginEditing(textInput: TextInput) -> Bool {
         return delegate?.animatedTextInputShouldBeginEditing?(animatedTextInput: self) ?? true
     }
 
-    open func textInputShouldEndEditing(textInput: TextInput) -> Bool {
+    public func textInputShouldEndEditing(textInput: TextInput) -> Bool {
         return delegate?.animatedTextInputShouldEndEditing?(animatedTextInput: self) ?? true
     }
 
-    open func textInputShouldReturn(textInput: TextInput) -> Bool {
+    public func textInputShouldReturn(textInput: TextInput) -> Bool {
         return delegate?.animatedTextInputShouldReturn?(animatedTextInput: self) ?? true
     }
 }
@@ -603,8 +603,8 @@ public protocol TextInput {
     var currentText: String? { get set }
     var font: UIFont? { get set }
     var textColor: UIColor? { get set }
-    var textAttributes: [NSAttributedStringKey: Any]? { get set }
-    weak var textInputDelegate: TextInputDelegate? { get set }
+    var textAttributes: [NSAttributedString.Key: Any]? { get set }
+    var textInputDelegate: TextInputDelegate? { get set }
     var currentSelectedTextRange: UITextRange? { get set }
     var currentBeginningOfDocument: UITextPosition? { get }
     var currentKeyboardAppearance: UIKeyboardAppearance { get set }
@@ -615,7 +615,7 @@ public protocol TextInput {
     func configureInputView(newInputView: UIView)
     func changeReturnKeyType(with newReturnKeyType: UIReturnKeyType)
     func currentPosition(from: UITextPosition, offset: Int) -> UITextPosition?
-    func changeClearButtonMode(with newClearButtonMode: UITextFieldViewMode)
+    func changeClearButtonMode(with newClearButtonMode: UITextField.ViewMode)
 }
 
 public extension TextInput where Self: UIView {
@@ -624,7 +624,7 @@ public extension TextInput where Self: UIView {
     }
 }
 
-public protocol TextInputDelegate: class {
+public protocol TextInputDelegate: AnyObject {
     func textInputDidBeginEditing(textInput: TextInput)
     func textInputDidEndEditing(textInput: TextInput)
     func textInputDidChange(textInput: TextInput)
@@ -653,6 +653,21 @@ public extension CATextLayer {
         case right
         case center
         case justified
+        
+        var mode: CATextLayerAlignmentMode {
+            switch self {
+            case .natural:
+                return .natural
+            case .left:
+                return .left
+            case .right:
+                return .right
+            case .center:
+                return .center
+            case .justified:
+                return .justified
+            }
+        }
     }
 }
 
